@@ -39,13 +39,13 @@ export async function room(req:Request,res:Response) {
         }
 
         const newRoom = await prismaClient.room.create({
-            slug:slug,
-            adminId:userId
+           data:{ slug:slug,
+                adminId:userId}
         })
 
-       const token = jwt.sign({
-        id:newRoom.id
-       },JWT_SECRETE)
+        const token = jwt.sign({
+            id:newRoom.id
+        },JWT_SECRETE)
 
        res.status(200).json({
         roomId:token,
