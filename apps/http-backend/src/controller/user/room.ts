@@ -33,7 +33,7 @@ export async function room(req:Request,res:Response) {
         })
         if(alreadyPresent){
             res.status(403).json({
-                message:"name already perest"
+                message:"roomId already present"
             })
             return;
         }
