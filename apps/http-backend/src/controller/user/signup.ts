@@ -28,8 +28,24 @@ export async function signup(req:Request,res:Response) {
         return; 
     }
 
+     
+
     try{
         const hashedPassword = await bcrypt.hash(password,5)
+
+        const user = await prismaClient.user.findFirst({
+            where:{
+                userName:userName
+            }
+        })
+
+        if(user){
+            res.status(411).json({
+                message:"user with that email already exist"
+            })
+            return;
+        }
+
         const newUser = await prismaClient.user.create({
             data:{
                 userName:userName,
@@ -39,7 +55,6 @@ export async function signup(req:Request,res:Response) {
             }
         })
 
-        console.log(newUser)
         res.status(200).json({
             message:"success"
         })

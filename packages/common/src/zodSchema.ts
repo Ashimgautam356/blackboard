@@ -15,8 +15,8 @@ export const SinginSchema = z.object({
 
 
 export const RoomSchema = z.object({
-    roomId:z.string().email().min(3).max(20),
-    password:z.string().min(3).max(20),
+    slug:z.string().email().min(3).max(20),
+    password:z.string().min(3).max(20).optional(),
 })
 
 

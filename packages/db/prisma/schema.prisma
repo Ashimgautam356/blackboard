@@ -20,7 +20,7 @@ model User{
   
   firstName   String
   lastName    String
-  userName    String 
+  userName    String @unique
   password    String
   photo       String?
 
@@ -32,10 +32,11 @@ model User{
 
 model Room{
   id          Int @default(autoincrement()) @id
+  
   slug        String @unique
-  createdAt   DateTime @default(now())
   adminId     String
 
+  createdAt   DateTime @default(now())
   admin       User   @relation(fields: [adminId],references: [id])
   chats       Chat[]
 }

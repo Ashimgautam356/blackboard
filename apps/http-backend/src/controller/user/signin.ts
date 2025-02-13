@@ -36,33 +36,43 @@ export async function signin(req:Request,res:Response) {
         return; 
     }
     
+    
     try{
-        const user:any = prismaClient.user.findFirst(userName); 
-        console.log(user)
+        const user:any =await prismaClient.user.findFirst({
+            where:{
+                userName:userName
+            }
+        }); 
+        const isCorrect = await bcrypt.compare(password, user?.password)
         if(!user){
             res.status(404).json({
                 message:"user not found"
             })
             return; 
         }
-        else if(user?.password == bcrypt.compare(password, user?.password)){
-            
-            const token = jwt.sign({
-                id:user?.uuid
-            },JWT_SECRETE)
-            
-            res.status(200).json({
-                message:"success",
-                token:token
-            })
 
+        if(!isCorrect){
+            res.status(403).json({
+                message:"password didn't match"
+            })
+            return;    
         }
-        res.status(403).json({
-            message:"password didn't match"
+
+        const token = jwt.sign({
+            id:user?.id
+        },JWT_SECRETE)
+        
+
+        res.status(200).json({
+            message:"success",
+            token:token
         })
 
     }catch(err){
         console.log(err)
+        res.status(500).json({
+            message:"internal server error"
+        })
     }
     
 }
