@@ -18,7 +18,7 @@ function checkUser(token:string): string | null{
     try{
 
         const decoded = jwt.verify(token,JWT_SECRETE);
-    
+        console.log(decoded)
         if(typeof decoded =='string'){
             return null;
         }
@@ -26,6 +26,7 @@ function checkUser(token:string): string | null{
         if(!decoded || !decoded.userId){
             return null;
         }
+        
         return decoded.userId
     }catch(er){
         return null
@@ -47,6 +48,7 @@ wss.on('connection',function connection(ws,request){
         return null; 
     }
 
+    
 
     users.push({
         userId,

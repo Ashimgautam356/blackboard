@@ -22,7 +22,7 @@ export async function auth(req:Request,res:Response,next:NextFunction) {
             return; 
         }
 
-        req.body.userId = isValid?.id ; 
+        req.body.userId = isValid?.userId; 
 
         next()
         

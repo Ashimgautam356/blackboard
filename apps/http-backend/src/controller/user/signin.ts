@@ -59,7 +59,7 @@ export async function signin(req:Request,res:Response) {
         }
 
         const token = jwt.sign({
-            id:user?.id
+            userId:user?.id
         },JWT_SECRETE)
         
 
