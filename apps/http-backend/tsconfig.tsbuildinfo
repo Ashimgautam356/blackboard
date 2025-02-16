@@ -1,1 +1,1 @@
-{"root":["./src/index.ts","./src/controller/user/room.ts","./src/controller/user/signin.ts","./src/controller/user/signup.ts","./src/middleware/auth.ts","./src/routes/main.ts","./src/routes/user.ts"],"version":"5.7.3"}
+{"root":["./src/index.ts","./src/controller/user/chat.ts","./src/controller/user/room.ts","./src/controller/user/signin.ts","./src/controller/user/signup.ts","./src/middleware/auth.ts","./src/routes/main.ts","./src/routes/user.ts"],"version":"5.7.3"}

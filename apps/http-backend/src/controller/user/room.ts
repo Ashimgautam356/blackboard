@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import {RoomSchema} from '@repo/common/types'
-import jwt from 'jsonwebtoken'
 import {prismaClient} from '@repo/db/client'
-import { JWT_SECRETE } from "@repo/backend-common/config";
 
 
 // const roomSchema = 
@@ -43,13 +41,11 @@ export async function room(req:Request,res:Response) {
                 adminId:userId}
         })
 
-        const token = jwt.sign({
-            id:newRoom.id
-        },JWT_SECRETE)
+        const roomId = newRoom.id;
 
        res.status(200).json({
-        roomId:token,
-        message:"room created"
+        message:"room created",
+        roomId
        })
     }catch(err){
         console.log(err)
