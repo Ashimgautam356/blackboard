@@ -1,11 +1,14 @@
 "use client";
 
+import { ReactNode } from "react";
+
 interface ButtonProps {
   variant: "outline"| "primary" | "secondary" | "disable",
   size: "sm" |  "lg" | "xl",
   name:String, 
   onClick: () => void ,
-  isDisable:boolean
+  isDisable:boolean, 
+  children?: ReactNode
 }
 
 const buttonSize = {
@@ -20,7 +23,10 @@ const buttonVariant = {
   "secondary":"bg-white text-[#2563EB] cursor-pointer ",
   "disable":"bg-gray-900 text-gray-700  cursor-disable "
 }
-export  const Button = ({variant, size, name, onClick ,isDisable }: ButtonProps) => {
+
+
+
+export  const Button = ({variant, size, name, onClick ,isDisable,children }: ButtonProps) => {
   console.log(buttonVariant[variant])
   return (
     <button
@@ -28,7 +34,8 @@ export  const Button = ({variant, size, name, onClick ,isDisable }: ButtonProps)
       onClick={onClick}
       disabled={isDisable}
     >
-      {name}
+      {isDisable?"Loading!!":name}
+      {children}
     </button>
   );
 };
